@@ -1,0 +1,39 @@
+.add_student_modal {
+    background-color: white;
+    border-radius: 10px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: .7s ease;
+}
+
+.add_student_form    {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 48px;
+}
+
+.add_student_modal.clicked {
+    top: 9%;
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.x_icon_2 {
+    position: absolute;
+    width: 24px;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    padding: 1px;
+    border-radius: 50%;
+}
+
+.x_icon_2:hover {
+    background-color: rgb(241, 241, 241);
+}

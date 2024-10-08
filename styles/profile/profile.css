@@ -1,0 +1,173 @@
+body {
+    position: relative;
+}
+
+.section-container {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    background-color: white;
+    border-radius: 6px;
+    padding: 60px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 6px;
+    padding: 6px;
+    outline: none;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 4px;
+    color: rgb(112, 112, 112);
+    width: 16vw;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    background-color: rgb(10, 127, 216);
+    color: white;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-picture-container img {
+    border-radius: 50%;
+    width: 8vw;
+    height: 8vw;
+    border: solid 3px rgb(223, 223, 223);
+    object-fit: cover;
+}
+
+
+.input_set {
+    display: flex;
+    flex-direction: column;
+}
+
+.input_set_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.input_set_container:nth-child(2), .input_set_container:nth-child(3) {
+    margin-bottom: 20px;
+}
+
+.my_profile {
+    margin-bottom: 10px;
+}
+
+.username {
+    margin-bottom: 24px;
+}
+
+.faculty_id {
+    margin-bottom: 24px;
+}
+
+.username , .faculty_id {
+    font-size: 14px;
+    color: rgb(83, 83, 83);
+}
+
+.profile-picture-section label{
+    font-size: 14px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.edit_button {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    cursor: pointer;
+}
+
+.edit_button img {
+    width: 16px;
+    opacity: .6;
+}
+
+.edit_button p {
+    color: rgb(116, 116, 116);
+    font-size: 14px;
+}
+
+.warning {
+    color: red;
+    font-size: 14px;
+    display: none;
+    margin: 4px 0;
+}
+
+.change-password-section {
+    margin-bottom: 40px;
+}
+
+.change-password-section h3 {
+    margin-bottom: 8px;
+}
+
+.change-password-section p, .change-password-section label{
+    font-size: 14px;
+}
+
+.update_password_button_container {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+
+.update_password_button {
+    width: 40%;
+    margin-top: 8px;
+    min-width: 140px;
+}
+
+.warning.current_password, .warning.confirm_password,.warning.same_password {
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.success_alert {
+    background-color: rgb(109, 169, 221);
+    color: white;
+    padding: 20px;
+    border-radius: 6px;
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: .5s ease;
+}
+
+.success_alert.active {
+    top: 10%;
+    opacity: .9;
+    pointer-events: initial;
+}
+
+.success_alert.warning_profile {
+    background-color: rgb(221, 109, 109);
+}

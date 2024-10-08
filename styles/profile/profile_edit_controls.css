@@ -1,0 +1,29 @@
+.profile_picture_controls_container, .profile_details_controls_container {
+    display: flex;
+    margin-top: 5px;
+}
+
+.confirm_buttons, .profile_form {
+    display: none;
+}
+
+.confirm_buttons {
+    margin-left: 10px;
+}
+
+.confirm , .cancel {
+    cursor: pointer;
+    background-color: initial;
+}
+
+.confirm {
+    background-color: rgb(52,168,83);
+}
+
+.disabled {
+    background-color: rgb(155, 206, 169);
+}
+
+.cancel {
+    background-color: rgb(240, 66, 66);
+}

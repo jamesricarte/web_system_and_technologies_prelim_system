@@ -1,0 +1,78 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+    padding: 50px;
+    border-radius: 8px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.register_form {
+    width: 400px;
+}
+
+input {
+    margin-bottom: 12px;
+    padding: 8px;
+    outline: none;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 6px;
+    color: rgb(112, 112, 112);
+}
+
+input[type=submit] {
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(10, 127, 216);
+    color: white;
+}
+
+label {
+    margin-bottom: 6px;
+    color: rgb(94, 94, 94);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.warning {
+    color: rgb(99, 99, 99);
+    display: none;
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: rgb(233, 203, 203);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.warning.show {
+    display: block;
+}
+
+h3 {
+    margin-bottom: 15px;
+}
+
+.names_container, .birthday_container, .faculty_container, .password_container{
+    display: flex;
+    width: 100%;
+}
+
+.input_set {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input_set.first {
+    margin-right: 10px;
+}

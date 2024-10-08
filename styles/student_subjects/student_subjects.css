@@ -1,0 +1,135 @@
+table {
+    border-collapse: collapse;
+    border-radius: 6px;
+    margin-top: 20px;
+    background-color: white;
+    width: 100%;
+}
+
+table td {
+    text-align: center;
+    padding: 10px;
+}
+
+thead {
+    background-color: rgb(236, 236, 236);
+}
+
+thead td {
+    font-weight: bold;
+    color: rgb(74, 74, 74);
+}
+
+tbody td {
+    color: rgb(103, 103, 103);
+}
+
+.details_container {
+    background-color: white;
+    width: 96%;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.details_wrapper {
+    padding: 40px;
+}
+
+.edit_subjects_button {
+    padding: 6px;
+}
+
+.back_icon {
+    width: 30px;
+}
+
+.back_button_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.back_dashboard_link {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.back_dashboard_link:hover {
+    opacity: .7;
+}
+
+.edit_subjects_modal {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 40vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: .6s ease;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    max-height: 300px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.background_overlay {
+    position: fixed;
+    width: 100%;
+    height:100%;
+    background-color: rgb(45, 45, 45);
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: .7s ease;
+}
+
+.edit_subjects_modal.clicked {
+    opacity: 1;
+    pointer-events: initial;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.background_overlay.clicked {
+    opacity: 0.6;
+    pointer-events: initial;
+}
+
+.edit_subjects_modal tr td {
+    border: solid rgb(225, 225, 225) 1px;
+    padding: 4px;
+    font-size: 14px;
+}
+
+.edit_subjects_modal tr {
+    cursor: pointer;
+}
+
+.edit_subjects_modal tr:hover {
+    background-color: rgb(244, 244, 244);
+}
+
+.x_icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 1px;
+}
+
+.x_icon:hover {
+    background-color: rgb(241, 241, 241);
+}
