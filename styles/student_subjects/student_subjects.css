@@ -133,3 +133,28 @@ tbody td {
 .x_icon:hover {
     background-color: rgb(241, 241, 241);
 }
+
+.add_subject_modal {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transition: .6s ease;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.add_subject_modal.clicked {
+    top: 9%;
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.add_subject_add_subject {
+    padding: 10px;
+}

@@ -151,14 +151,6 @@ $stmt_student->close();
     </main>
 
     <div class="edit_subjects_modal">
-        <!-- <select name="" id="">
-            <option value="">CC105</option>
-            <option value="">CC106</option>
-            <option value="">CC107</option>
-            <option value="">CC107</option>
-            <option value="">CC107</option>
-            <option value="">CC107</option>
-        </select> -->
         <button class="add_schedule_button">Add</button>
         <button>Delete</button>
         <table>
@@ -228,6 +220,22 @@ $stmt_student->close();
                 </tr>
             </tbody>
         </table>
+        <img class="x_icon" src="../images/icons/x_icon.png">
+    </div>
+
+    <div class="add_subject_modal">
+        <form action="">
+            <select name="" id="">
+                <option value="">CC105</option>
+                <option value="">CC106</option>
+                <option value="">CC107</option>
+                <option value="">CC107</option>
+                <option value="">CC107</option>
+                <option value="">CC107</option>
+            </select>
+            <button class="add_subject_add_subject" type="submit">Add Subject</button>
+        </form>
+
         <img class="x_icon" src="../images/icons/x_icon.png">
     </div>
 
