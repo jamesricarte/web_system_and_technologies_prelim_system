@@ -36,7 +36,7 @@ tbody td {
 }
 
 .edit_subjects_button {
-    padding: 6px;
+    padding: 8px;
 }
 
 .back_icon {
@@ -105,6 +105,15 @@ tbody td {
     pointer-events: initial;
 }
 
+.edit_subjects_modal .buttons_container {
+    display: flex;
+    gap: 8px;
+}
+
+.add_schedule_button, .delete_schedule_button {
+    padding: 8px;
+}
+
 .edit_subjects_modal tr td {
     border: solid rgb(225, 225, 225) 1px;
     padding: 4px;
@@ -149,12 +158,23 @@ tbody td {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+.add_subject_modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add_subject_modal_add_button {
+    padding: 8px;
+    width: 120px;
+}
+
 .add_subject_modal.clicked {
     top: 9%;
     opacity: 1;
     pointer-events: initial;
 }
 
-.add_subject_add_subject {
-    padding: 10px;
+.delete_schedule_button.disable {
+    background-color: rgb(144, 194, 232);
 }

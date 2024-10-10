@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2024 at 07:06 PM
+-- Generation Time: Oct 10, 2024 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -87,7 +87,8 @@ INSERT INTO `login` (`login_id`, `reg_id`, `username`, `password`) VALUES
 (5, 5, 'carl', '$2y$10$A2VEmLbJXQ9bFWNAkI7N7e9aqt.slUJqVWbR0auMS96yjroUsi7Tq'),
 (6, 6, 'brad', '$2y$10$GVIzHJrQa/8VBMKItndu1.Ymq6jfGDj6opCHZ3QuC.vTQtiYmItn.'),
 (7, 13, 'tine', '$2y$10$53fjU9C.EhjpkL1pBGY7Guva.Hl8oCR99dX370q6ACZP2JW9wEON.'),
-(8, 16, 'apable', '$2y$10$.gEmsRZ.CDDJDB.0ZBMXve20dZxo.s1cFU/bltxMKdNA3FuwaEAPy');
+(8, 16, 'apable', '$2y$10$.gEmsRZ.CDDJDB.0ZBMXve20dZxo.s1cFU/bltxMKdNA3FuwaEAPy'),
+(9, 17, 'chan', '$2y$10$avQw5H3bLCMEC1yGOA/25ODvR5XVSex3P2qIzBhT9ZA9SQXb2kh76');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,8 @@ INSERT INTO `registration` (`reg_id`, `faculty_id`, `first_name`, `last_name`, `
 (5, '80499a83', 'Carl', 'Dolino', 'Cruz', 'carl@gmail.com', '2022-01-06', 2, NULL),
 (6, '', 'Brad', 'Soloria', 'C', 'brad@gmail.com', '2009-02-05', 15, NULL),
 (13, '2e61f8c6', 'Christine', 'Rholda', 'Mae', 'tine@gmail.com', '2020-09-09', 4, NULL),
-(16, 'cf8fabe9', 'Francis', 'Ramirez', 'Lopez', 'francis@gmail.com', '2002-02-07', 22, NULL);
+(16, 'cf8fabe9', 'Francis', 'Ramirez', 'Lopez', 'francis@gmail.com', '2002-02-07', 22, NULL),
+(17, '57cefcec', 'Christian', 'Dacillo', 'Velasquez', 'christian@gmail.com', '2004-09-21', 20, NULL);
 
 -- --------------------------------------------------------
 
@@ -224,7 +226,11 @@ INSERT INTO `students` (`student_id`, `reg_id`, `first_name`, `last_name`, `midd
 (5, 2, 'James Mickel', 'Ricarte', 'C', 7110972, 2, 3, 2),
 (8, 1, 'Emman', 'Espenia', 'B', 77741, 1, 3, 1),
 (10, 3, 'Emman', 'Espenia', 'C', 82332, 1, 3, 1),
-(11, 1, 'Christian', 'Dacillo', 'F', 7234234, 1, 3, NULL);
+(11, 1, 'Christian', 'Dacillo', 'F', 7234234, 1, 3, 2),
+(19, 3, 'Charles', 'Alamares', 'Marfil', 3494546, 1, 3, NULL),
+(26, 16, 'James', 'Ricarte', 'M', 96965, 1, 3, NULL),
+(27, 16, 'Charles', 'Alamares', 'Marfil', 9348385, 2, 3, NULL),
+(29, 17, 'Charles', 'Alamares', 'M', 934545, 1, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -237,6 +243,21 @@ CREATE TABLE `student_schedules` (
   `student_id` int(11) NOT NULL,
   `schedule_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_schedules`
+--
+
+INSERT INTO `student_schedules` (`student_schedule_id`, `student_id`, `schedule_id`) VALUES
+(1, 1, 1),
+(2, 1, 5),
+(3, 1, 2),
+(8, 26, 2),
+(10, 1, 3),
+(11, 1, 4),
+(15, 11, 6),
+(16, 11, 3),
+(17, 29, 5);
 
 -- --------------------------------------------------------
 
@@ -358,7 +379,9 @@ ALTER TABLE `students`
 -- Indexes for table `student_schedules`
 --
 ALTER TABLE `student_schedules`
-  ADD PRIMARY KEY (`student_schedule_id`);
+  ADD PRIMARY KEY (`student_schedule_id`),
+  ADD KEY `connectt_schedule` (`schedule_id`),
+  ADD KEY `connect_student` (`student_id`);
 
 --
 -- Indexes for table `subjects`
@@ -392,13 +415,13 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -422,13 +445,13 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `student_schedules`
 --
 ALTER TABLE `student_schedules`
-  MODIFY `student_schedule_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -456,10 +479,10 @@ ALTER TABLE `login`
 -- Constraints for table `schedules`
 --
 ALTER TABLE `schedules`
-  ADD CONSTRAINT `connectFromBlocks` FOREIGN KEY (`block_id`) REFERENCES `blocks` (`block_id`),
-  ADD CONSTRAINT `connectFromRooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
-  ADD CONSTRAINT `connectFromSubjects` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`),
-  ADD CONSTRAINT `connectFromTeachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`);
+  ADD CONSTRAINT `connectFromBlocks` FOREIGN KEY (`block_id`) REFERENCES `blocks` (`block_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromRooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromSubjects` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromTeachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `students`
@@ -468,6 +491,13 @@ ALTER TABLE `students`
   ADD CONSTRAINT `ConnectFromCoursesId` FOREIGN KEY (`course`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `connectFromRegId` FOREIGN KEY (`reg_id`) REFERENCES `registration` (`reg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `connectFromStatusesId` FOREIGN KEY (`status`) REFERENCES `statuses` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student_schedules`
+--
+ALTER TABLE `student_schedules`
+  ADD CONSTRAINT `connect_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectt_schedule` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

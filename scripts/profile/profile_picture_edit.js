@@ -6,8 +6,10 @@ document.querySelector('.edit_button.profile_picture').addEventListener('click',
     }
 
     document.querySelectorAll('.input_toggle').forEach(function(element) {
-        element.value = originalValues[element.name];
-        element.disabled = true;
+        if (element.disabled === false) {
+            element.value = originalValues[element.name];
+            element.disabled = true;
+        }
     }) 
 
     document.querySelector('.file_input').click();

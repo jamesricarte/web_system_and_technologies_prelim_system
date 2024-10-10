@@ -16,7 +16,7 @@ if (isset($_SESSION['isSidebarMinimized']) && $_SESSION['isSidebarMinimized']) {
 $stmt_user = $conn->prepare("SELECT registration.first_name, registration.profile_picture
     FROM login
     JOIN registration ON login.reg_id = registration.reg_id
-    WHERE login.login_id = ?");
+    WHERE login.reg_id = ?");
 $stmt_user->bind_param("i", $_SESSION['id']);
 $stmt_user->execute();
 $stmt_user->bind_result($user_first_name, $profile_picture);
@@ -34,7 +34,10 @@ $stmt_courses = $conn->prepare("SELECT course_id, course_name FROM courses");
 $stmt_courses->execute();
 $stmt_courses->bind_result($course_id, $course_name);
 while ($stmt_courses->fetch()) {
-    $courses[] = ['output_course_id' => $course_id, 'output_course_name' => $course_name];
+    $courses[] = [
+        'output_course_id' => $course_id,
+        'output_course_name' => $course_name
+    ];
 };
 $stmt_courses->close();
 
@@ -43,7 +46,6 @@ $stmt = $conn->prepare("SELECT students.student_id, students.first_name, student
      JOIN courses ON students.course = course_id
      LEFT JOIN statuses ON students.status = status_id
      WHERE students.reg_id = ?");
-
 $stmt->bind_param("i", $_SESSION["id"]);
 $stmt->execute();
 $stmt->bind_result($student_id, $first_name, $last_name, $middle_name, $school_id, $course, $year_level, $status);
