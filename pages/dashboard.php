@@ -13,22 +13,6 @@ if (isset($_SESSION['isSidebarMinimized']) && $_SESSION['isSidebarMinimized']) {
     $labelWrapperDisplay = 'initial';
 }
 
-$stmt_user = $conn->prepare("SELECT registration.first_name, registration.profile_picture
-    FROM login
-    JOIN registration ON login.reg_id = registration.reg_id
-    WHERE login.reg_id = ?");
-$stmt_user->bind_param("i", $_SESSION['id']);
-$stmt_user->execute();
-$stmt_user->bind_result($user_first_name, $profile_picture);
-$stmt_user->fetch();
-$stmt_user->close();
-
-if ($profile_picture === null) {
-    $profile_picture = '../images/sample_profile.jpg';
-} else {
-    $profile_picture = '../images/user_profile_pictures/' . $_SESSION['id'] . '/' . $profile_picture;
-}
-
 $courses = [];
 $stmt_courses = $conn->prepare("SELECT course_id, course_name FROM courses");
 $stmt_courses->execute();
@@ -49,6 +33,20 @@ $stmt = $conn->prepare("SELECT students.student_id, students.first_name, student
 $stmt->bind_param("i", $_SESSION["id"]);
 $stmt->execute();
 $stmt->bind_result($student_id, $first_name, $last_name, $middle_name, $school_id, $course, $year_level, $status);
+$students = [];
+while ($stmt->fetch()) {
+    $students[] = [
+        'student_id' => $student_id,
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'middle_name' => $middle_name,
+        'school_id' => $school_id,
+        'course' => $course,
+        'year_level' => $year_level,
+        'status' => $status,
+    ];
+}
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -73,17 +71,8 @@ $stmt->bind_result($student_id, $first_name, $last_name, $middle_name, $school_i
 
     <main>
         <div class="section_column">
-            <div class="left_section">
 
-                <div class="navigation_links selected">
-                    <div class="sidebar_icon_wrapper">
-                        <img class="home_icon" src="../images/icons/home_icon.png" alt="">
-                    </div>
-                    <div class="sidebar_label_wrapper" style="display: <?php echo $labelWrapperDisplay; ?> ;">
-                        <h5>Dashboard</h5>
-                    </div>
-                </div>
-            </div>
+            <?php include('partials/sidebar.php') ?>
 
             <div class="right_section">
                 <div class="add_student_button_wrapper">
@@ -105,25 +94,25 @@ $stmt->bind_result($student_id, $first_name, $last_name, $middle_name, $school_i
                     <tbody>
                         <?php
                         $index = 1;
-                        while ($stmt->fetch()) {
+                        foreach ($students as $student) {
 
-                            if (strlen($middle_name) == 1) {
-                                $output_middle_name = $middle_name . ".";
+                            if (strlen($student['middle_name']) == 1) {
+                                $output_middle_name = $student['middle_name'] . ".";
                             } else {
-                                $output_middle_name = $middle_name;
+                                $output_middle_name = $student['middle_name'];
                             }
 
-                            if ($status == 1) {
+                            if ($student['status'] == 1) {
                                 $output_status = "
                                         <div class='status_button present'>Present</div>
                                         <div class='status_button js-absent'>Absent</div>
                                         <div class='status_button js-late'>Late</div>";
-                            } else if ($status == 2) {
+                            } else if ($student['status'] == 2) {
                                 $output_status = "
                                         <div class='status_button js-present'>Present</div>
                                         <div class='status_button absent'>Absent</div>
                                         <div class='status_button js-late'>Late</div>";
-                            } else if ($status == 3) {
+                            } else if ($student['status'] == 3) {
                                 $output_status = "
                                         <div class='status_button js-present'>Present</div>
                                         <div class='status_button js-absent'>Absent</div>
@@ -136,18 +125,18 @@ $stmt->bind_result($student_id, $first_name, $last_name, $middle_name, $school_i
                             }
                             echo
                             "<tr>
-                                    <td class='student_id' data-student-id='$student_id'>$student_id</td>
+                                    <td class='student_id' data-student-id='{$student['student_id']}'>{$student['student_id']}</td>
                                     <td>$index</td>
-                                    <td data-first-name='$first_name' data-middle-name='$middle_name' data-last-name='$last_name'>$first_name $output_middle_name $last_name</td>
-                                    <td data-school-id='$school_id'>$school_id</td>
-                                    <td class='status_td' data-status='$status'>
+                                    <td data-first-name='{$student['first_name']}' data-middle-name='{$student['middle_name']}' data-last-name='{$student['last_name']}'>{$student['first_name']} $output_middle_name {$student['last_name']}</td>
+                                    <td data-school-id='{$student['school_id']}'>{$student['school_id']}</td>
+                                    <td class='status_td' data-status='{$student['status']}'>
                                         $output_status
                                     </td>
-                                    <td data-course='$course'>$course</td>
-                                    <td data-year-level='$year_level'>$year_level</td>
+                                    <td data-course='{$student['course']}'>{$student['course']}</td>
+                                    <td data-year-level='{$student['year_level']}'>{$student['year_level']}</td>
                                     <td class='operation_td'>
                                         <div>
-                                            <a href='student_subjects.php?studentId=$student_id'>
+                                            <a href='student_subjects.php?studentId={$student['student_id']}'>
                                                 <button class='view_subjects_button'>View Subjects</button>
                                             </a>
                                         </div>

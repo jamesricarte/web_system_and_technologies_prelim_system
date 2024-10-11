@@ -3,6 +3,25 @@ if (empty($_SESSION['id'])) {
     header("HTTP/1.1 404 Not Found");
     exit;
 }
+
+$stmt_user_nav = $conn->prepare("SELECT registration.first_name, registration.profile_picture
+    FROM login
+    JOIN registration ON login.reg_id = registration.reg_id
+    WHERE login.reg_id = ?");
+$stmt_user_nav->bind_param("i", $_SESSION['id']);
+$stmt_user_nav->execute();
+$stmt_user_nav->bind_result($user_first_name, $profile_picture);
+$stmt_user_nav->fetch();
+$stmt_user_nav->close();
+
+if ($profile_picture === null) {
+    $output_profile_picture = "<div class='profile-icon profile_picture_default'>
+        <h3>" . strtoupper(substr($user_first_name, 0, 1)) . "</h3>
+    </div>";
+} else {
+    $profile_picture_path = '../images/user_profile_pictures/' . $_SESSION['id'] . '/' . $profile_picture;
+    $output_profile_picture = "<img src='{$profile_picture_path}' class='profile-icon'>";
+}
 ?>
 
 <nav>
@@ -23,7 +42,7 @@ if (empty($_SESSION['id'])) {
     </div>
 
     <div class="nav-right-section">
-        <img src="<?php echo $profile_picture ?>" class="profile-icon">
+        <?php echo $output_profile_picture ?>
         <h5 class="user_name"><?php echo $user_first_name; ?></h5>
     </div>
 

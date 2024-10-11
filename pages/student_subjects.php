@@ -17,26 +17,13 @@ if (isset($_SESSION['isSidebarMinimized']) && $_SESSION['isSidebarMinimized']) {
     $labelWrapperDisplay = 'initial';
 }
 
-$stmt_user = $conn->prepare("SELECT registration.first_name, registration.profile_picture
-    FROM login
-    JOIN registration ON login.reg_id = registration.reg_id
-    WHERE login.reg_id = ?");
-$stmt_user->bind_param("i", $_SESSION['id']);
-$stmt_user->execute();
-$stmt_user->bind_result($user_first_name, $profile_picture);
-$stmt_user->fetch();
-$stmt_user->close();
-
-if ($profile_picture === null) {
-    $profile_picture = '../images/sample_profile.jpg';
-} else {
-    $profile_picture = '../images/user_profile_pictures/' . $_SESSION['id'] . '/' . $profile_picture;
-}
-
-$stmt_student = $conn->prepare("SELECT first_name, last_name, middle_name, school_id, course, year_level FROM students WHERE student_id = ?");
+$stmt_student = $conn->prepare("SELECT students.first_name, students.last_name, students.middle_name, students.school_id, courses.course_id, courses.course_name, students.year_level
+FROM students
+JOIN courses ON students.course = courses.course_id
+WHERE students.student_id = ?");
 $stmt_student->bind_param("i", $_GET['studentId']);
 $stmt_student->execute();
-$stmt_student->bind_result($student_first_name, $student_last_name, $student_middle_name, $school_id, $course, $year_level);
+$stmt_student->bind_result($student_first_name, $student_last_name, $student_middle_name, $school_id, $course_id, $course, $year_level);
 if (!$stmt_student->fetch()) {
     header('Location: dashboard.php');
 }
@@ -77,7 +64,10 @@ JOIN subjects ON schedules.subject_id = subjects.subject_id
 JOIN blocks ON schedules.block_id = blocks.block_id
 JOIN rooms ON schedules.room_id = rooms.room_id
 JOIN teachers ON schedules.teacher_id = teachers.teacher_id
-");
+LEFT JOIN student_schedules ON schedules.schedule_id = student_schedules.schedule_id
+AND student_schedules.student_id = ?
+WHERE student_schedules.schedule_id IS NULL AND course_id = ?");
+$stmt_schedules->bind_param('ii', $_GET['studentId'], $course_id);
 $stmt_schedules->execute();
 $stmt_schedules->bind_result($schedule_id, $catalog_number, $descriptive_title, $block_name, $start_time, $end_time, $day_of_week, $room_name, $teacher_first_name, $teacher_last_name, $teacher_middle_name);
 
@@ -118,17 +108,8 @@ $stmt_schedules->close();
 
     <main>
         <div class="section_column">
-            <div class="left_section">
 
-                <div class="navigation_links selected">
-                    <div class="sidebar_icon_wrapper">
-                        <img class="home_icon" src="../images/icons/home_icon.png" alt="">
-                    </div>
-                    <div class="sidebar_label_wrapper" style="display: <?php echo $labelWrapperDisplay; ?> ;">
-                        <h5>Dashboard</h5>
-                    </div>
-                </div>
-            </div>
+            <?php include('partials/sidebar.php') ?>
 
             <div class="right_section">
                 <div class="details_container">
@@ -154,7 +135,7 @@ $stmt_schedules->close();
                                     <th>Descriptive Title</th>
                                     <th>Units</th>
                                     <th>Block</th>
-                                    <th>Section</th>
+                                    <th>Schedule</th>
                                     <th>Room</th>
                                     <th>Teacher</th>
                                 </tr>
@@ -192,6 +173,17 @@ $stmt_schedules->close();
             </form>
         </div>
         <table>
+            <thead>
+                <tr>
+                    <td>Catalog No.</td>
+                    <td>Descriptive Title</td>
+                    <td>Units</td>
+                    <td>Block</td>
+                    <td>Schedule</td>
+                    <td>Room</td>
+                    <td>Teacher</td>
+                </tr>
+            </thead>
             <?php foreach ($student_schedules as $schedule) {
                 $time = $schedule['start_time'] . "-" . $schedule['end_time'] . " " . $schedule['day_of_week'];
 
@@ -215,7 +207,7 @@ $stmt_schedules->close();
     <div class="add_subject_modal">
         <form action="../process/student_subjects/add_subject.php" method="post">
             <input type="hidden" name="student_id" value="<?php echo $_GET['studentId'] ?>">
-            <select name="schedule_id">
+            <select class="subjects_dropdown" name="schedule_id" required>
                 <?php
                 foreach ($schedules as $schedule) {
                     echo '<option value="' . $schedule['schedule_id'] . '">' . $schedule['catalog_number'] . " " . $schedule['descriptive_title'] . " " . $schedule['block_name'] . " " . $schedule['teacher_full_name'] . '</option>';

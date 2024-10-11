@@ -28,13 +28,9 @@ if (hamburgerIcon && sidebarLabel) {
     })
 }   
 
-if (window.location.pathname == '/web_system_and_technologies_prelim_system/pages/dashboard.php') {
+if (window.location.pathname == '/web_system_and_technologies_prelim_system/pages/profile.php') {
+    document.querySelector('.profile_dropdown_sections.profile').style.display = 'none';
+} else {
     document.querySelector('.profile_dropdown_sections.dashboard').style.display = 'none';
     document.querySelector('.profile_dropdown_sections.profile').classList.add('first');
-} else if (window.location.pathname == '/web_system_and_technologies_prelim_system/pages/profile.php') {
-    document.querySelector('.profile_dropdown_sections.profile').style.display = 'none';
-    
-    document.querySelector('.hamburger_icon_container').style.display = 'none';
-} else {
-    document.querySelector('.profile_dropdown_sections.profile').style.display = 'none';
 }

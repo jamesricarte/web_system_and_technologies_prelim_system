@@ -54,6 +54,14 @@ input[type="submit"] {
     object-fit: cover;
 }
 
+.profile-picture-container .profile-icon {
+    border-radius: 50%;
+    width: 8vw;
+    height: 8vw;
+    border: solid 3px rgb(223, 223, 223);
+    object-fit: cover;
+}
+
 
 .input_set {
     display: flex;

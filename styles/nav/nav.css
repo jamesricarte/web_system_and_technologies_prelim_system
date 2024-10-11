@@ -67,13 +67,21 @@ nav {
     align-items: center;
 }
 
-.profile-icon {
+.profile-icon{
     width: 34px;
     height: 34px;
     background-color: rgb(224, 224, 224);
     border-radius: 50%;
     cursor: pointer;
     object-fit: cover;
+}
+
+.profile_picture_default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5a1bb;
+    color: white;
 }
 
 .user_name {

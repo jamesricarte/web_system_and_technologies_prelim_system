@@ -175,6 +175,10 @@ tbody td {
     pointer-events: initial;
 }
 
+.subjects_dropdown {
+    min-width: 200px;
+}
+
 .delete_schedule_button.disable {
     background-color: rgb(144, 194, 232);
 }

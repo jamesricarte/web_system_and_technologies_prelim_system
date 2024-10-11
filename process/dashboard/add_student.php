@@ -21,11 +21,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt_insert->execute()) {
 
-        $_SESSION["add_student_success"] = true;
+        $student_id = $stmt_insert->insert_id;
+
         $stmt_insert->close();
 
-        header('Location: ../../pages/dashboard.php');
-        exit;
+        $stmt_add_subject = $conn->prepare("INSERT INTO student_schedules (student_id, schedule_id)
+        SELECT ?, schedules.schedule_id
+        FROM schedules
+        WHERE schedules.course_id = ?");
+        $stmt_add_subject->bind_param("ii", $student_id, $course);
+
+        if ($stmt_add_subject->execute()) {
+
+            $_SESSION["add_student_success"] = true;
+
+            $stmt_add_subject->close();
+
+            header('Location: ../../pages/dashboard.php');
+        } else {
+
+            $_SESSION["add_student_success"] = false;
+
+            echo "Error: " . $stmt_add_subject . "<br>" . mysqli_error($conn);
+            $stmt_add_subject->close();
+        }
     } else {
         $_SESSION["add_student_success"] = false;
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 04:13 PM
+-- Generation Time: Oct 11, 2024 at 07:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -80,15 +80,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`login_id`, `reg_id`, `username`, `password`) VALUES
-(1, 1, 'charuzu444', '$2y$10$o3YpXrhSciOxhbfkh00Cw.0G7pxzrNr.lwWBEnyobv8WY6oOY91Ea'),
-(2, 2, 'cedric', '$2y$10$oh6vhiC/K7fbkWYsYalp5ObJu75nBJYJX01XR1mJkbP8C4qIBF/6a'),
-(3, 3, 'majo', '$2y$10$cWx6Utky/kEtbFn19bQe.uYmAulQwB867u/knHlIyDFJFT7uQcAv6'),
-(4, 4, 'emman', '$2y$10$iNt.25IskR6GzcoMnu5Bw./gAmf/kyJnZam4oyv7R.MJJDkIdmVPG'),
-(5, 5, 'carl', '$2y$10$A2VEmLbJXQ9bFWNAkI7N7e9aqt.slUJqVWbR0auMS96yjroUsi7Tq'),
-(6, 6, 'brad', '$2y$10$GVIzHJrQa/8VBMKItndu1.Ymq6jfGDj6opCHZ3QuC.vTQtiYmItn.'),
-(7, 13, 'tine', '$2y$10$53fjU9C.EhjpkL1pBGY7Guva.Hl8oCR99dX370q6ACZP2JW9wEON.'),
-(8, 16, 'apable', '$2y$10$.gEmsRZ.CDDJDB.0ZBMXve20dZxo.s1cFU/bltxMKdNA3FuwaEAPy'),
-(9, 17, 'chan', '$2y$10$avQw5H3bLCMEC1yGOA/25ODvR5XVSex3P2qIzBhT9ZA9SQXb2kh76');
+(1, 1, 'charles', '$2y$10$kmdMM9H2qmlGPk8pdZl0BOjqYolakIa9/koy0bLmQSaEgO62qce6i'),
+(2, 2, 'apable', '$2y$10$5VmL8OrStag.bouTNFM3W.vqEQXJZpYLtt.sQP/Jf7d610Ir1wTda');
 
 -- --------------------------------------------------------
 
@@ -113,15 +106,8 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`reg_id`, `faculty_id`, `first_name`, `last_name`, `middle_name`, `email`, `birthday`, `age`, `profile_picture`) VALUES
-(1, '7490f0f9', 'Charles', 'Alamares', 'Marfil', 'charles@gmail.com', '2002-07-30', 22, '260742788_225642179707073_8699292937256620403_n.jpg'),
-(2, 'fd947588', 'Cedric', 'Naño', 'Lawrence', 'cedric@gmail.com', '2002-03-08', 0, '256759877_448379213318839_7307962930220879254_n.jpg'),
-(3, 'a06c1c5c', 'Mark', 'Joseph', 'Ante', 'majo@gmail.com', '2004-01-25', 0, NULL),
-(4, '01860f2f', 'Emman', 'Espenia', 'Lopez', 'emman@gmail.com', '2004-05-01', 20, NULL),
-(5, '80499a83', 'Carl', 'Dolino', 'Cruz', 'carl@gmail.com', '2022-01-06', 2, NULL),
-(6, '', 'Brad', 'Soloria', 'C', 'brad@gmail.com', '2009-02-05', 15, NULL),
-(13, '2e61f8c6', 'Christine', 'Rholda', 'Mae', 'tine@gmail.com', '2020-09-09', 4, NULL),
-(16, 'cf8fabe9', 'Francis', 'Ramirez', 'Lopez', 'francis@gmail.com', '2002-02-07', 22, NULL),
-(17, '57cefcec', 'Christian', 'Dacillo', 'Velasquez', 'christian@gmail.com', '2004-09-21', 20, NULL);
+(1, '02d233ea', 'Charles', 'Alamares', 'Marfil', 'charles@gmail.com', '2002-08-28', 22, '462550850_1194428811622326_2947488563645517019_n.jpg'),
+(2, 'd12d221f', 'John Rey', 'Apable', 'Amado', 'apable@gmail.com', '2003-06-10', 21, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,21 +147,29 @@ CREATE TABLE `schedules` (
   `start_time` varchar(5) NOT NULL,
   `end_time` varchar(5) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL
+  `teacher_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`schedule_id`, `subject_id`, `block_id`, `day_of_week`, `start_time`, `end_time`, `room_id`, `teacher_id`) VALUES
-(1, 1, 2, 'MW', '9:30', '12:00', 5, 2),
-(2, 2, 2, 'ThSa', '9:30', '12:00', 7, 1),
-(3, 3, 2, 'TF', '13:00', '15:30', 5, 5),
-(4, 4, 1, 'MW', '15:30', '18:00', 4, 6),
-(5, 5, 1, 'MW', '7:30', '9:00', 2, 7),
-(6, 6, 2, 'TF', '9:00', '10:30', 3, 8),
-(7, 7, 4, 'Thu', '13:00', '15:00', 1, 9);
+INSERT INTO `schedules` (`schedule_id`, `subject_id`, `block_id`, `day_of_week`, `start_time`, `end_time`, `room_id`, `teacher_id`, `course_id`) VALUES
+(1, 1, 2, 'MW', '9:30', '12:00', 5, 2, 1),
+(2, 2, 2, 'ThSa', '9:30', '12:00', 7, 1, 1),
+(3, 3, 2, 'TF', '13:00', '15:30', 5, 5, 1),
+(4, 4, 1, 'MW', '15:30', '18:00', 4, 6, 1),
+(5, 5, 1, 'MW', '7:30', '9:00', 2, 7, 1),
+(6, 6, 2, 'TF', '9:00', '10:30', 3, 8, 1),
+(7, 7, 4, 'Thu', '13:00', '15:00', 1, 9, 1),
+(8, 8, 1, 'MW', '15:30', '18:00', 2, 12, 2),
+(9, 9, 2, 'MW', '7:30', '9:00', 7, 13, 2),
+(10, 10, 2, 'MW', '9:30', '12:00', 6, 14, 2),
+(11, 11, 3, 'ThSa', '9:30', '12:00', 4, 15, 2),
+(12, 12, 1, 'TF', '13:00', '15:30', 3, 16, 2),
+(13, 13, 2, 'TF', '9:00', '10:30', 6, 17, 2),
+(14, 14, 2, 'Thu', '13:00', '15:00', 4, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -220,17 +214,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `reg_id`, `first_name`, `last_name`, `middle_name`, `school_id`, `course`, `year_level`, `status`) VALUES
-(1, 1, 'James', 'Ricarte', 'Cao', 7110972, 2, 3, 1),
-(3, 1, 'Cedric', 'Naño', 'L', 7434343, 2, 3, 1),
-(4, 2, 'Mark Joseph', 'Ante', 'M', 743534, 1, 3, 1),
-(5, 2, 'James Mickel', 'Ricarte', 'C', 7110972, 2, 3, 2),
-(8, 1, 'Emman', 'Espenia', 'B', 77741, 1, 3, 1),
-(10, 3, 'Emman', 'Espenia', 'C', 82332, 1, 3, 1),
-(11, 1, 'Christian', 'Dacillo', 'F', 7234234, 1, 3, 2),
-(19, 3, 'Charles', 'Alamares', 'Marfil', 3494546, 1, 3, NULL),
-(26, 16, 'James', 'Ricarte', 'M', 96965, 1, 3, NULL),
-(27, 16, 'Charles', 'Alamares', 'Marfil', 9348385, 2, 3, NULL),
-(29, 17, 'Charles', 'Alamares', 'M', 934545, 1, 3, NULL);
+(1, 1, 'Charles', 'Alamares', 'Marfil', 7110972, 1, 3, 2),
+(2, 1, 'Cedric', 'Naño', 'Lawrence', 956572, 2, 3, 1),
+(3, 2, 'Chrstine', 'Rholda', 'M', 9456456, 1, 3, 1),
+(4, 2, 'Rhea', 'Buates', 'L', 7454654, 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -250,14 +237,33 @@ CREATE TABLE `student_schedules` (
 
 INSERT INTO `student_schedules` (`student_schedule_id`, `student_id`, `schedule_id`) VALUES
 (1, 1, 1),
-(2, 1, 5),
-(3, 1, 2),
-(8, 26, 2),
-(10, 1, 3),
-(11, 1, 4),
-(15, 11, 6),
-(16, 11, 3),
-(17, 29, 5);
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 2, 8),
+(9, 2, 9),
+(10, 2, 10),
+(11, 2, 11),
+(12, 2, 12),
+(13, 2, 13),
+(14, 2, 14),
+(15, 3, 1),
+(16, 3, 2),
+(17, 3, 3),
+(18, 3, 4),
+(19, 3, 5),
+(20, 3, 6),
+(21, 3, 7),
+(22, 4, 8),
+(23, 4, 9),
+(24, 4, 10),
+(25, 4, 11),
+(26, 4, 12),
+(27, 4, 13),
+(28, 4, 14);
 
 -- --------------------------------------------------------
 
@@ -283,7 +289,14 @@ INSERT INTO `subjects` (`subject_id`, `catalog_number`, `descriptive_title`, `un
 (4, 'IT PC 312', 'NETWORKING 2', 3),
 (5, 'IT PC 313', 'SYSTEMS INTEGRATION AND ARCHITECTURE', 3),
 (6, 'IT PC 314', 'SOCIAL AND PROFESSIONAL ISSUES', 3),
-(7, 'PATHFit 3', 'PHYSICAL ACTIVITIES TOWARDS HEALTH & FITNESS 3: DANCE', 2);
+(7, 'PATHFit 3', 'PHYSICAL ACTIVITIES TOWARDS HEALTH & FITNESS 3: DANCE', 2),
+(8, 'APC 3101', 'Physics for CS (with Electromagnetism)', 4),
+(9, 'CCS 3101', 'Algorithm and Complexity', 3),
+(10, 'CCS 3102', 'Methods of Research for CS', 3),
+(11, 'CCS 3103', 'Networks and Communications', 3),
+(12, 'CCS 3104', 'Software Engineering 2', 3),
+(13, 'CDT 1101', 'Data Analytics', 3),
+(14, 'CMS 1101', 'Multimedia Systems', 3);
 
 -- --------------------------------------------------------
 
@@ -311,7 +324,14 @@ INSERT INTO `teachers` (`teacher_id`, `school_id`, `first_name`, `last_name`, `m
 (6, 28374, 'Victor Jr.', 'Quinzon', 'Parillas', NULL),
 (7, 25664, 'Abegail', 'Herrera', 'Palmes', NULL),
 (8, 92334, 'Aljohn', 'Marilag', 'Saberdo', NULL),
-(9, 34355, 'Erika', 'Mendoza', 'Aldave', NULL);
+(9, 34355, 'Erika', 'Mendoza', 'Aldave', NULL),
+(12, 93434, 'Chelsea', 'Chasteen', 'Sanchez', NULL),
+(13, 93434, 'Jax', 'Holak', 'JJ', NULL),
+(14, 954534, 'Kaleb', 'Netters', 'Kelby', NULL),
+(15, 93434, 'Kimberly', 'Stastny', 'Kubrick', NULL),
+(16, 23033, 'Orville', 'Zinz', 'Oli', NULL),
+(17, 1284, 'Caden', 'Cilley', 'Valley', NULL),
+(18, 28484, 'Cody', 'Doughman', 'Bro', NULL);
 
 --
 -- Indexes for dumped tables
@@ -358,7 +378,8 @@ ALTER TABLE `schedules`
   ADD KEY `connectFromSubjects` (`subject_id`),
   ADD KEY `connectFromBlocks` (`block_id`),
   ADD KEY `connectFromRooms` (`room_id`),
-  ADD KEY `connectFromTeachers` (`teacher_id`);
+  ADD KEY `connectFromTeachers` (`teacher_id`),
+  ADD KEY `connectFromCourses2` (`course_id`);
 
 --
 -- Indexes for table `statuses`
@@ -415,13 +436,13 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -433,7 +454,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `statuses`
@@ -445,25 +466,25 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `student_schedules`
 --
 ALTER TABLE `student_schedules`
-  MODIFY `student_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `student_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -473,13 +494,14 @@ ALTER TABLE `teachers`
 -- Constraints for table `login`
 --
 ALTER TABLE `login`
-  ADD CONSTRAINT `from_reg_id` FOREIGN KEY (`reg_id`) REFERENCES `registration` (`reg_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `connectFromRegistration` FOREIGN KEY (`reg_id`) REFERENCES `registration` (`reg_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `schedules`
 --
 ALTER TABLE `schedules`
   ADD CONSTRAINT `connectFromBlocks` FOREIGN KEY (`block_id`) REFERENCES `blocks` (`block_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromCourses2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `connectFromRooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `connectFromSubjects` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `connectFromTeachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -488,16 +510,16 @@ ALTER TABLE `schedules`
 -- Constraints for table `students`
 --
 ALTER TABLE `students`
-  ADD CONSTRAINT `ConnectFromCoursesId` FOREIGN KEY (`course`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `connectFromRegId` FOREIGN KEY (`reg_id`) REFERENCES `registration` (`reg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `connectFromStatusesId` FOREIGN KEY (`status`) REFERENCES `statuses` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ConnectFromCourses` FOREIGN KEY (`course`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromRegistration2` FOREIGN KEY (`reg_id`) REFERENCES `registration` (`reg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromStatuses` FOREIGN KEY (`status`) REFERENCES `statuses` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_schedules`
 --
 ALTER TABLE `student_schedules`
-  ADD CONSTRAINT `connect_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `connectt_schedule` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `connectFromScheduleID` FOREIGN KEY (`schedule_id`) REFERENCES `schedules` (`schedule_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `connectFromStudentID` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
