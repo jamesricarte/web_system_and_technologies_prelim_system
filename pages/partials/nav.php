@@ -5,9 +5,9 @@ if (empty($_SESSION['id'])) {
 }
 
 $stmt_user_nav = $conn->prepare("SELECT registration.first_name, registration.profile_picture
-    FROM login
-    JOIN registration ON login.reg_id = registration.reg_id
-    WHERE login.reg_id = ?");
+        FROM login
+        JOIN registration ON login.reg_id = registration.reg_id
+        WHERE login.reg_id = ?");
 $stmt_user_nav->bind_param("i", $_SESSION['id']);
 $stmt_user_nav->execute();
 $stmt_user_nav->bind_result($user_first_name, $profile_picture);
@@ -16,22 +16,12 @@ $stmt_user_nav->close();
 
 if ($profile_picture === null) {
 
-    $colors = ['#B97A5D', '#6DA67A', '#7A8DB9', '#C58DAE', '#7AB9B1', '#C2B280'];
-
-    $randomColorKey = array_rand($colors);
-    $randomColor = $colors[$randomColorKey];
-
-    $randomColorKey = array_rand($colors);
-    $randomColor = $colors[$randomColorKey];
-
-    $output_profile_picture = "<div class='profile-icon profile_picture_default' style='background-color: {$randomColor};'>
-        <h3>" . strtoupper(substr($user_first_name, 0, 1)) . "</h3>
-    </div>";
-
     include('image_generator/profile_picture_default_generator.php');
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 } else {
     $profile_picture_path = '../images/user_profile_pictures/' . $_SESSION['id'] . '/' . $profile_picture;
-    $output_profile_picture = "<img src='{$profile_picture_path}' class='profile-icon'>";
 }
 ?>
 
@@ -53,7 +43,7 @@ if ($profile_picture === null) {
     </div>
 
     <div class="nav-right-section">
-        <?php echo $output_profile_picture ?>
+        <img src="<?php echo $profile_picture_path ?>" class="profile-icon">
         <h5 class="user_name"><?php echo $user_first_name; ?></h5>
     </div>
 

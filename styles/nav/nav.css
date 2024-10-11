@@ -76,14 +76,6 @@ nav {
     object-fit: cover;
 }
 
-.profile_picture_default {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: #e5a1bb; */
-    color: white;
-}
-
 .user_name {
     margin-left: 10px;
     cursor: pointer;

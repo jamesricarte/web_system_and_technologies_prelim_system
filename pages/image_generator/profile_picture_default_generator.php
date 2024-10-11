@@ -1,4 +1,11 @@
 <?php
+$colors = ['#B97A5D', '#6DA67A', '#7A8DB9', '#C58DAE', '#7AB9B1', '#C2B280'];
+
+$randomColorKey = array_rand($colors);
+$randomColor = $colors[$randomColorKey];
+
+$randomColorKey = array_rand($colors);
+$randomColor = $colors[$randomColorKey];
 
 $firstName = str_replace(' ', '_',  $user_first_name);
 $firstLetter = strtoupper(substr($firstName, 0, 1));
