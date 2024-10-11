@@ -80,7 +80,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e5a1bb;
+    /* background-color: #e5a1bb; */
     color: white;
 }
 

@@ -15,9 +15,20 @@ $stmt_user_nav->fetch();
 $stmt_user_nav->close();
 
 if ($profile_picture === null) {
-    $output_profile_picture = "<div class='profile-icon profile_picture_default'>
+
+    $colors = ['#B97A5D', '#6DA67A', '#7A8DB9', '#C58DAE', '#7AB9B1', '#C2B280'];
+
+    $randomColorKey = array_rand($colors);
+    $randomColor = $colors[$randomColorKey];
+
+    $randomColorKey = array_rand($colors);
+    $randomColor = $colors[$randomColorKey];
+
+    $output_profile_picture = "<div class='profile-icon profile_picture_default' style='background-color: {$randomColor};'>
         <h3>" . strtoupper(substr($user_first_name, 0, 1)) . "</h3>
     </div>";
+
+    include('image_generator/profile_picture_default_generator.php');
 } else {
     $profile_picture_path = '../images/user_profile_pictures/' . $_SESSION['id'] . '/' . $profile_picture;
     $output_profile_picture = "<img src='{$profile_picture_path}' class='profile-icon'>";
